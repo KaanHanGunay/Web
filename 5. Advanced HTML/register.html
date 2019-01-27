@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Advanced HTML - Register</title>
+    </head>
+    <body>
+        <!--Yorum Satırı-->
+        <div>
+            <form method="GET">
+                First Name: <input type="text" name="firstname" required ><br>
+                Last Name: <input type="text" required name="lastname"><br>
+                Email: <input type="email" required name="email"><br>
+                Password: <input type="password" minlength="5" name="password"><br>
+                Birtday: <input type="date" required name="birtday"><br>
+                Gender: <br><input type="radio" name="gender" value="Male">Male
+                <input type="radio" name="gender" value="Female">Female<br>
+                Pets: <br>
+                <input type="checkbox" name="cat">Cat <br>
+                <input type="checkbox" name="dog">Dog <br>
+                Cars:
+                <select value="cars">
+                    <option value="Volvo" name="volvo">Volvo</option>
+                    <option value="Audi" name="audi">Audi</option>
+                </select> <br>
+                <input type="submit" value="Register!">
+                <input type="reset" value="Reset!">
+            </form>
+        </div>
+    </body>
+</html>

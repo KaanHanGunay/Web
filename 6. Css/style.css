@@ -1,0 +1,51 @@
+* {
+    text-align: right;
+}
+
+body{
+    background-image: url(bursa.jpg);
+    background-size: cover;
+}
+
+h2, p {
+    color: #AA4139;
+    text-align: center;
+    border: 5px solid rgba(255, 176, 170, 0.5);
+    cursor: pointer;
+}
+
+p {
+    text-decoration: underline;
+    font-size: 120%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+img {
+    float: left;
+}
+
+footer {
+    clear: both;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    display: inline;
+}
+
+.webtext {
+    border: 5px dashed green;
+}
+
+.active {
+    color: aqua;
+}
+
+#div1 {
+    background-color: rgba(0, 0, 255, 0.2)
+}
+
+#div2 {
+    background-color: rgba(255, 0, 0, 0.2)
+}
