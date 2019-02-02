@@ -32,7 +32,7 @@ function addDeleteButton(parent) {
     deleteButton.appendChild(document.createTextNode("Sil"));
     deleteButton.addEventListener("click", function () {
         ul.removeChild(parent);
-    })
+    });
     parent.appendChild(deleteButton);
 }
 
