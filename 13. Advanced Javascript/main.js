@@ -101,3 +101,21 @@ const fun = (a, b,) => {
 Object.keys(object1); // Return all keys
 Object.entries(object1); // Return all entries as a array
 Object.values(object3); // Reaturn all values
+
+// Advanced Loops
+const basket = ['apples', 'oranges', 'grapes'];
+const detailedBasket = {
+    apples: 5,
+    oranges: 10,
+    grapes: 50
+}
+
+// for of
+for(item of basket){
+    console.log(item);
+} // using with itarables
+
+// for in
+for(item in detailedBasket){
+    console.log(item);
+} // using with objects (properties)
