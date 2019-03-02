@@ -1,3 +1,5 @@
 .vscode/c_cpp_properties.json
 14. NPM/node_modules/*
 24. NodeJS and ExpressJS/1/node_modules/*
+final_project_backend/node_modules/*
+final_project_backend/.idea/*
