@@ -2,6 +2,21 @@ const express = require('express');
 const bodyParser = require('body-parser'); // gelen verinin içini görmek için
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
+const knex = require('knex'); //veri tabanı bağlantısı için
+
+const db = knex({
+    client: 'pg',
+    connection: {
+        host : '127.0.0.1',
+        user: 'postgres',
+        password: '9632',
+        database: 'smartbrain'
+    }
+});
+/*
+db.select('*').from('users').then(data => {
+    console.log(data);
+});*/
 
 const app = express();
 app.use(bodyParser.json());
@@ -49,44 +64,45 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
     const { email, name } = req.body;
-    database.users.push({
-        id: 125,
-        name: name,
-        email: email,
-        entries: 0,
-        joined: new Date()
-    })
-    res.json(database.users[database.users.length-1]);
+    db('users')
+        .returning('*') // veri tabanına bastığını geri al
+        .insert({
+            email: email,
+            name: name,
+            joined: new Date()
+        }).then(user => {
+            res.json(user[0]);
+        })
+        .catch(err => res.status(400).json('Unable to register'));
 })
 
 app.get('/profile/:id', (req, res) => {
     const { id } = req.params;
-    let found = false;
-    database.users.forEach(user => {
-        if(user.id === id) {
-            found = true;
-            return res.json(user);
-        }
-    })
-    if(!found) {
-        res.status(400).json('not found');
-    }
+    db.select('*').from('users').where({ id: id })
+        .then(user => {
+            if(user.lenght > 0){
+                res.json(user[0]);
+            } else {
+                res.status(404).json('Kullanıcı bulunamadı');
+            }
+        })
+        .catch(err => {
+            res.status(400).json('Connection error');
+        });
 })
 
 app.put('/image', (req, res) => {
     const { id } = req.body;
-    let found = false;
-    database.users.forEach(user => {
-        if(user.id === id) {
-            found = true;
-            user.entries++;
-            return res.json(user.entries);
-        }
-    })
-    if(!found) {
-        res.status(400).json('not found');
-    }
-    res.json('not found');
+    db('users')
+        .where('id', '=', id)
+        .increment('entries', 1)
+        .returning('entries')
+        .then(entries => {
+            res.json(entries[0]);
+        })
+        .catch(err => {
+            res.status(400).json('Hata oluştu!');
+        });
 })
 
 app.listen(3000, () => {
